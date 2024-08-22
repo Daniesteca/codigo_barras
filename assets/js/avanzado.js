@@ -1,3 +1,5 @@
+let html5QrCode = null;
+
 function lecturaCorrecta(codigoTexto, codigoObjeto) {
     // handle the scanned code as you like, for example:
     console.log(`Code matched = ${codigoTexto}`, codigoObjeto);
@@ -42,8 +44,9 @@ Html5Qrcode.getCameras().then(camaras => {
     // console.log('elemento :>>', elemento);
     let idCamaraSeleccionada = elemento.value;
     console.log('idCamaraSeleccionada :>>', idCamaraSeleccionada);
+    document.getElementById("imagenReferencial").style.display ="none";
 
-        const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+        html5QrCode = new Html5Qrcode(/* element id */ "reader");
         html5QrCode.start(
           idCamaraSeleccionada, 
           {
@@ -55,7 +58,17 @@ Html5Qrcode.getCameras().then(camaras => {
           // Start failed, handle it.
         });
 
+  }
 
+  const detenerCamara =() =>{
 
+    html5QrCode.stop().then((ignore) => {
+      // QR Code scanning is stopped.
+      document.getElementById("imagenReferencial").style.display ="block";
+      document.getElementById("listaCamaras").value = "";
+      // alert("detuve la camara");
+    }).catch((err) => {
+      // Stop failed, handle it.
+    });
 
   }
