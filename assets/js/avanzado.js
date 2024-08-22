@@ -49,14 +49,8 @@ Html5Qrcode.getCameras().then(camaras => {
           {
             fps: 10,    // Optional, frame per seconds for qr code scanning
             qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
-          },
-          (decodedText, decodedResult) => {
-            // do something when code is read
-            console.log('decodedText :>>', decodedText);
-          },
-          (errorMessage) => {
-            // parse error, ignore it.
-          })
+          },lecturaCorrecta, errorLectura)
+
         .catch((err) => {
           // Start failed, handle it.
         });
