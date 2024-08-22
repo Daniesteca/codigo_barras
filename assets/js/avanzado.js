@@ -1,5 +1,6 @@
 let html5QrCode = null;
 
+
 function lecturaCorrecta(codigoTexto, codigoObjeto) {
     // handle the scanned code as you like, for example:
     console.log(`Code matched = ${codigoTexto}`, codigoObjeto);
@@ -39,6 +40,7 @@ Html5Qrcode.getCameras().then(camaras => {
   // handle err
 });
 
+//*oculta imagen referencial cuando la camara es encendida*/
 
   const camaraSeleccionada =(elemento)=>{
     // console.log('elemento :>>', elemento);
@@ -60,6 +62,7 @@ Html5Qrcode.getCameras().then(camaras => {
 
   }
 
+  /*Muestra la imagen referencial cuando se detiene la camara */
   const detenerCamara =() =>{
 
     html5QrCode.stop().then((ignore) => {
@@ -88,7 +91,7 @@ fileinput.addEventListener('change', e => {
   const imageFile = e.target.files[0];
   // Scan QR Code
   html5QrCode2.scanFile(imageFile, true)
-  .then(lecturaCorrecta)
+  .then(lecturaCorrecta,document.getElementById("imagenReferencial").style.display ="none")
   .catch(err => {
     // failure, handle it.
     console.log(`Error scanning file. Reason: ${err}`)
