@@ -72,3 +72,25 @@ Html5Qrcode.getCameras().then(camaras => {
     });
 
   }
+
+
+  /* para imagenes*/
+
+  const html5QrCode2 = new Html5Qrcode(/* element id */ "reader.file");
+// File based scanning
+const fileinput = document.getElementById('qr-input-file');
+fileinput.addEventListener('change', e => {
+  if (e.target.files.length == 0) {
+    // No file selected, ignore 
+    return;
+  }
+
+  const imageFile = e.target.files[0];
+  // Scan QR Code
+  html5QrCode2.scanFile(imageFile, true)
+  .then(lecturaCorrecta)
+  .catch(err => {
+    // failure, handle it.
+    console.log(`Error scanning file. Reason: ${err}`)
+  });
+});
